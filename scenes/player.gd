@@ -175,3 +175,8 @@ func _update_stamina(delta: float) -> void:
 		var stamina_bar = hud.get_node("SprintBar")
 		if stamina_bar:
 			stamina_bar.value = current_stamina
+
+# TIME TRAVEL
+func _process(delta):
+	if Input.is_action_just_pressed("switch_timeline"):
+		timeline_manager.switch_timeline()
