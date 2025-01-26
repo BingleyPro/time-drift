@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://piq1qo6dhgdh"]
+[gd_scene load_steps=12 format=3 uid="uid://jc0tddaupmho"]
 
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_8teri"]
 [ext_resource type="Texture2D" uid="uid://ya235vbyvsuk" path="res://test_scene_assets/fakepngcat.png" id="2_87uvm"]

@@ -1,3 +1,4 @@
-res://scenes/player.tscn
 res://node_3d.tscn
-res://scenes/mainMenu.tscn
+res://levels/level1.tscn
+res://scenes/player.tscn
+res://main.tscn
