@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://f5t6qejtykuf"]
+[gd_scene load_steps=6 format=3 uid="uid://f5t6qejtykuf"]
 
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_2s5sd"]
 [ext_resource type="PackedScene" uid="uid://bi1xukieabk6q" path="res://scenes/SettingsWindow.tscn" id="2_m3nvr"]
+[ext_resource type="Texture2D" uid="uid://b45xqowst1x1c" path="res://assets/play.png" id="3_sk3k6"]
+[ext_resource type="Texture2D" uid="uid://2iyqbva1isvd" path="res://assets/settings.png" id="4_abekx"]
+[ext_resource type="Texture2D" uid="uid://bdt54rsmwvrem" path="res://assets/exit.png" id="4_jgski"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -21,32 +24,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -111.0
-offset_top = -157.0
-offset_right = 112.0
-offset_bottom = -123.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 24
-text = "my awesome game"
-
-[node name="Label2" type="Label" parent="Label"]
-layout_mode = 0
-offset_left = 134.0
-offset_top = 24.0
-offset_right = 224.0
-offset_bottom = 58.0
-theme_override_colors/font_color = Color(0.934358, 0.934358, 7.70092e-07, 1)
-theme_override_font_sizes/font_size = 24
-text = "DELUXE"
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 466.0
@@ -56,15 +33,32 @@ offset_bottom = 482.0
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Play"
+text = " "
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Button"]
+position = Vector2(110, 12)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_sk3k6")
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Settings"
+text = " "
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Button2"]
+position = Vector2(110, 17)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_abekx")
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Exit to desktop"
+text = " "
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Button3"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(110, 14)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_jgski")
 
 [node name="Settings" parent="." instance=ExtResource("2_m3nvr")]
 layout_mode = 0
