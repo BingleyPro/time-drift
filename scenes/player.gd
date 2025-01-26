@@ -6,6 +6,7 @@ enum CharacterState {
 	SPRINTING = 1,
 	CROUCHING = 2
 }
+var hud: Node = null
 
 # All of the actually important stuff
 @onready var head := $head
@@ -19,10 +20,17 @@ var currentState : CharacterState = CharacterState.WALKING
 
 # Options
 @export var DEFAULT_SPEED := 3
-@export var JUMP_VELOCITY := 2.5
+@export var JUMP_VELOCITY := 3
 @export var mouse_sensitivity := 0.1
 @export var SPRINT_SPEED := 3.5
 @export var CROUCH_SPEED := 1.5
+@export var MAX_STAMINA := 100.0
+@export var SPRINT_DRAIN_RATE := 20.0
+@export var REGEN_RATE := 10.0
+@export var 	MIN_STAMINA_SPRINT := 10.0
+
+var current_stamina := MAX_STAMINA # current stamina
+var is_sprinting := false # is the player sprinting
 var inputEnabled := true # can the player move?
 var aimlookEnabled := true # can the player look around?
 var interactionsEnabled := true # can the player interact with Interactibles3D?
@@ -33,6 +41,12 @@ func _ready():
 	$MeshInstance3D.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	GameManager.player = self
+	
+	hud = get_parent().get_node("HUD")
+	current_stamina = MAX_STAMINA
+	
+	if hud == null:
+		push_error("HUD not found")
 
 func _physics_process(delta: float) -> void:
 	if !inputEnabled:
@@ -56,6 +70,8 @@ func _physics_process(delta: float) -> void:
 	# All of the other processing functions go here
 	_process_interact()
 	_handle_states()
+	
+	_update_stamina(delta)
 	
 	move_and_slide()
 
@@ -105,13 +121,16 @@ func _handle_states():
 			change_state(CharacterState.WALKING)
 		else:
 			change_state(CharacterState.CROUCHING)
-	elif Input.is_action_pressed("sprint"):
+	elif Input.is_action_pressed("sprint") and current_stamina >= MIN_STAMINA_SPRINT:
 		if currentState == CharacterState.CROUCHING:
 			return
 		if currentState == CharacterState.SPRINTING:
 			return
+		is_sprinting = true
 		change_state(CharacterState.SPRINTING)
 	else:
+		if currentState == CharacterState.SPRINTING:
+			is_sprinting = false
 		if currentState != CharacterState.WALKING and currentState != CharacterState.CROUCHING:
 			change_state(CharacterState.WALKING)
 
@@ -134,3 +153,23 @@ func change_state(state : CharacterState):
 	currentState = state
 
 #endregion
+
+func _update_stamina(delta: float) -> void:
+	if is_sprinting:
+		# Drain stamina while sprinting
+		current_stamina -= SPRINT_DRAIN_RATE * delta
+		if current_stamina <= 0:
+			current_stamina = 0
+			change_state(CharacterState.WALKING)  # Stop sprinting when stamina runs out
+	else:
+		# Regenerate stamina when not sprinting
+		if current_stamina < MAX_STAMINA:
+			current_stamina += REGEN_RATE * delta
+			if current_stamina > MAX_STAMINA:
+				current_stamina = MAX_STAMINA
+		
+	# Update HUD progress bar
+	if hud:
+		var stamina_bar = hud.get_node("SprintBar")
+		if stamina_bar:
+			stamina_bar.value = current_stamina

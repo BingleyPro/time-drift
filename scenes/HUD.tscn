@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bq864afmgrexa"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="SprintBar" type="ProgressBar" parent="."]
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 264.0
+offset_bottom = 39.0

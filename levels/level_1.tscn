@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2i7ad6vadc21"]
+[gd_scene load_steps=8 format=3 uid="uid://b2i7ad6vadc21"]
 
+[ext_resource type="PackedScene" uid="uid://bq864afmgrexa" path="res://scenes/HUD.tscn" id="1_1o0q2"]
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_awnm3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jkji4"]
@@ -16,9 +17,9 @@ sky = SubResource("Sky_yyedr")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kven2"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_bn63v"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_htoj8"]
+[sub_resource type="BoxMesh" id="BoxMesh_e5qeh"]
 
 [node name="level1" type="Node3D"]
 
@@ -31,13 +32,15 @@ light_energy = 1.15
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_awnm3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0561273, 0)
 
 [node name="floor" type="StaticBody3D" parent="."]
-transform = Transform3D(12.47, 0, 0, 0, 0.1, 0, 0, 0, 12.47, 0, 0, 0)
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0.0320969, -7.6473, 0.000197411)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
-shape = SubResource("BoxShape3D_kven2")
+shape = SubResource("BoxShape3D_bn63v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
-mesh = SubResource("BoxMesh_htoj8")
+mesh = SubResource("BoxMesh_e5qeh")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="HUD" parent="." instance=ExtResource("1_1o0q2")]
