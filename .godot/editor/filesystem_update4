@@ -1,3 +1,5 @@
 res://scenes/player.tscn
 res://node_3d.tscn
 res://scenes/mainMenu.tscn
+res://main.tscn
+res://scenes/SettingsWindow.tscn
