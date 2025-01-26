@@ -1,4 +1,12 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1737864933
-icon.svg::CompressedTexture2D::5707039871349961767::1737864895::1737864933::1::::<><>::
-README.md::TextFile::-1::1737864765::0::1::::<><>::
+::res://::1737865985
+icon.svg::CompressedTexture2D::5707039871349961767::1737865366::1737865478::1::::<><>::
+node_3d.tscn::PackedScene::1858719399857824009::1737865366::0::1::::<><>::
+README.md::TextFile::-1::1737865820::0::1::::<><>::
+::res://assets/::1737865857
+::res://scenes/::1737865985
+player.tscn::PackedScene::3611808840168377422::1737865581::0::1::::<><>::res://scenes/player.gd<>uid://c6wmqp0buuk5m::::res://scenes/PlayerGUI.tscn
+playerGUI.gd::GDScript::-1::1737865581::0::1::::<>CanvasLayer<>::
+PlayerGUI.tscn::PackedScene::6994869833913520368::1737865581::0::1::::<><>::uid://bulteu43r2r6a::::res://gfx/crosshair.png<>res://scenes/playerGUI.gd<>res://scenes/pause_node.gd<>uid://bs035oor8cgug::::res://scenes/SettingsWindow.tscn
+::res://scripts/::1737865985
+player.gd::GDScript::-1::1737865966::0::1::::PlayerCharacter<>CharacterBody3D<>::
