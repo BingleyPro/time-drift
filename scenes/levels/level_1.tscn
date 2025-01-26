@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/timeline_manager.gd" id="1_5cqa1"]
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_nr5kb"]
 
-[node name="Level1" type="Node3D"]
+[node name="Level2" type="Node3D"]
 
 [node name="TimelineManager" type="Node" parent="."]
 script = ExtResource("1_5cqa1")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2i7ad6vadc21"]
+[gd_scene load_steps=8 format=3 uid="uid://blc6yj0xrnof"]
 
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_awnm3"]
+[ext_resource type="Script" path="res://scripts/timeline_manager.gd" id="2_28lxv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jkji4"]
 sky_top_color = Color(0.178285, 0.497917, 0.549767, 1)
@@ -33,11 +34,29 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_awnm3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0561273, 0)
 
-[node name="floor" type="StaticBody3D" parent="."]
+[node name="PastLayer" type="Node3D" parent="."]
+
+[node name="floor" type="StaticBody3D" parent="PastLayer"]
 transform = Transform3D(12.47, 0, 0, 0, 0.1, 0, 0, 0, 12.47, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PastLayer/floor"]
 shape = SubResource("BoxShape3D_kven2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PastLayer/floor"]
 mesh = SubResource("BoxMesh_htoj8")
+
+[node name="PresentLayer" type="Node3D" parent="."]
+
+[node name="floor2" type="StaticBody3D" parent="PresentLayer"]
+transform = Transform3D(21.17, 0, 0, 0, 0.17, 0, 0, 0, 21.17, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PresentLayer/floor2"]
+shape = SubResource("BoxShape3D_kven2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PresentLayer/floor2"]
+mesh = SubResource("BoxMesh_htoj8")
+
+[node name="TimelineManager" type="Node" parent="." node_paths=PackedStringArray("past_layer", "present_layer")]
+script = ExtResource("2_28lxv")
+past_layer = NodePath("../PastLayer")
+present_layer = NodePath("../PresentLayer")

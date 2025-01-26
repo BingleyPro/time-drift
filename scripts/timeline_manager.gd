@@ -7,9 +7,9 @@ extends Node
 var current_timeline = "present"
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	switch_to("present")
-	
+#func _ready():
+#	switch_to("present")
+#	
 func switch_timeline():
 	if current_timeline == "present":
 		switch_to("past")
