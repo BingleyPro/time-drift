@@ -1,9 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bwcmk0ujew1cy"]
+[gd_scene load_steps=9 format=3 uid="uid://jc0tddaupmho"]
 
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_8teri"]
-[ext_resource type="Texture2D" uid="uid://ya235vbyvsuk" path="res://test_scene_assets/fakepngcat.png" id="2_87uvm"]
-[ext_resource type="Script" path="res://test_scene_assets/ButtonInteractible.gd" id="2_dgpk1"]
-[ext_resource type="AudioStream" uid="uid://bda1e85y0na7r" path="res://test_scene_assets/miau.ogg" id="3_dq0nh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2q4g"]
 sky_top_color = Color(0.371817, 5.62528e-07, 9.62615e-08, 1)
@@ -28,7 +25,6 @@ albedo_color = Color(1, 0, 0, 1)
 size = Vector3(0.272949, 0.172974, 0.234375)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gkoj"]
-albedo_texture = ExtResource("2_87uvm")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vcox7"]
 material = SubResource("StandardMaterial3D_6gkoj")
@@ -61,15 +57,12 @@ size = Vector3(0.201775, 0.0473022, 0.202767)
 material = SubResource("StandardMaterial3D_yjcof")
 
 [node name="Interactible3D" type="Area3D" parent="TestPlace/CSGBox3D3"]
-script = ExtResource("2_dgpk1")
-InteractText = "Press [E] to summon cool ass cat"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestPlace/CSGBox3D3/Interactible3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0178223, 0.0786743, 0.0214844)
 shape = SubResource("BoxShape3D_52idf")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TestPlace/CSGBox3D3/Interactible3D"]
-stream = ExtResource("3_dq0nh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="TestPlace"]
 transform = Transform3D(1, 0, 0, 0, 0.849479, 0.527623, 0, -0.527623, 0.849479, 0, 3.38979, 3.26035)

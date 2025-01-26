@@ -17,7 +17,7 @@ sky = SubResource("Sky_mnt7l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.69453, 0.195903, 8.79958)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.72456, -0.294788, 8.28992)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.78677, -0.294786, 8.29138)
 use_collision = true
 size = Vector3(4.53662, 1, 8.56109)
 
