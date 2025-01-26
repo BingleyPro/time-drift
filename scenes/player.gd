@@ -27,7 +27,7 @@ var currentState : CharacterState = CharacterState.WALKING
 @export var MAX_STAMINA := 100.0
 @export var SPRINT_DRAIN_RATE := 20.0
 @export var REGEN_RATE := 10.0
-@export var 	MIN_STAMINA_SPRINT := 10.0
+@export var MIN_STAMINA_SPRINT := 0
 
 var current_stamina := MAX_STAMINA # current stamina
 var is_sprinting := false # is the player sprinting
@@ -121,13 +121,15 @@ func _handle_states():
 			change_state(CharacterState.WALKING)
 		else:
 			change_state(CharacterState.CROUCHING)
-	elif Input.is_action_pressed("sprint") and current_stamina >= MIN_STAMINA_SPRINT:
+	elif Input.is_action_pressed("sprint"):
 		if currentState == CharacterState.CROUCHING:
 			return
 		if currentState == CharacterState.SPRINTING:
 			return
-		is_sprinting = true
-		change_state(CharacterState.SPRINTING)
+		# Only start sprinting if we have enough stamina
+		if current_stamina > MIN_STAMINA_SPRINT + 5.0: # Add buffer
+			is_sprinting = true
+			change_state(CharacterState.SPRINTING)
 	else:
 		if currentState == CharacterState.SPRINTING:
 			is_sprinting = false
@@ -158,15 +160,15 @@ func _update_stamina(delta: float) -> void:
 	if is_sprinting:
 		# Drain stamina while sprinting
 		current_stamina -= SPRINT_DRAIN_RATE * delta
-		if current_stamina <= 0:
-			current_stamina = 0
+		if current_stamina <= MIN_STAMINA_SPRINT + 2.0:
+			current_stamina = MIN_STAMINA_SPRINT
+			is_sprinting = false
 			change_state(CharacterState.WALKING)  # Stop sprinting when stamina runs out
 	else:
 		# Regenerate stamina when not sprinting
 		if current_stamina < MAX_STAMINA:
 			current_stamina += REGEN_RATE * delta
-			if current_stamina > MAX_STAMINA:
-				current_stamina = MAX_STAMINA
+			current_stamina = min(current_stamina, MAX_STAMINA)
 		
 	# Update HUD progress bar
 	if hud:
