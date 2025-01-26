@@ -1,6 +1,8 @@
 class_name PlayerCharacter
 extends CharacterBody3D
 
+@onready var timeline_manager = $"../TimelineManager"
+
 enum CharacterState {
 	WALKING = 0,
 	SPRINTING = 1,
@@ -134,3 +136,10 @@ func change_state(state : CharacterState):
 	currentState = state
 
 #endregion
+
+
+
+# TIME TRAVEL
+func _process(delta):
+	if Input.is_action_just_pressed("switch_timeline"):
+		timeline_manager.switch_timeline()
