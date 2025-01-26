@@ -26,7 +26,7 @@ var currentState : CharacterState = CharacterState.WALKING
 @export var CROUCH_SPEED := 1.5
 @export var MAX_STAMINA := 100.0
 @export var SPRINT_DRAIN_RATE := 20.0
-@export var REGEN_RATE := 10.0
+@export var REGEN_RATE := 5.0
 @export var MIN_STAMINA_SPRINT := 0
 
 var current_stamina := MAX_STAMINA # current stamina
