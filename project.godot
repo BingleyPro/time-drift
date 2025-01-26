@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Simple First Person Template"
+config/name="Time-Drift"
 config/version="1.0"
 run/main_scene="res://scenes/mainMenu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")

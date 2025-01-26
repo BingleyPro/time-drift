@@ -1,5 +1,6 @@
-res://scenes/player.tscn
-res://node_3d.tscn
 res://scenes/mainMenu.tscn
-res://main.tscn
+res://scenes/player.tscn
 res://scenes/SettingsWindow.tscn
+res://main.tscn
+res://scenes/main_menu.gd
+res://levels/level1.tscn
