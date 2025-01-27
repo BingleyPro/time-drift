@@ -185,10 +185,6 @@ shape = SubResource("BoxShape3D_bn63v")
 mesh = SubResource("BoxMesh_e5qeh")
 skeleton = NodePath("../CollisionShape3D")
 
-[node name="TimelineManager" type="Node" parent="." node_paths=PackedStringArray("timeline_layers", "player")]
-script = ExtResource("3_6lso0")
-timeline_layers = [NodePath("../Past Layer"), NodePath("../Present Layer")]
-
 [node name="Wall4" type="StaticBody3D" parent="Present Layer"]
 transform = Transform3D(-4.37114e-08, 0, 6, 0, 5, 0, -1, 0, -2.62268e-07, -2.51, 2, 5.88243)
 
@@ -229,10 +225,8 @@ shape = SubResource("BoxShape3D_bn63v")
 mesh = SubResource("BoxMesh_e5qeh")
 skeleton = NodePath("../CollisionShape3D")
 
-[node name="TimelineManager" type="Node" parent="." node_paths=PackedStringArray("past_layer", "present_layer", "timeline_layers", "player")]
+[node name="TimelineManager" type="Node" parent="." node_paths=PackedStringArray("timeline_layers", "player")]
 script = ExtResource("3_6lso0")
-past_layer = NodePath("../Past Layer")
-present_layer = NodePath("../Present Layer")
 timeline_layers = [NodePath("../Present Layer"), NodePath("../Past Layer")]
 player = NodePath("../Player")
 
