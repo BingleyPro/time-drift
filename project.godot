@@ -33,8 +33,18 @@ project/assembly_name="player-template"
 [file_customization]
 
 folder_colors={
+"res://assets/": "purple",
+"res://assets/animations/": "red",
+"res://assets/materials/": "orange",
+"res://assets/models/": "yellow",
+"res://assets/shaders/": "green",
+"res://assets/sounds/": "teal",
+"res://assets/textures/": "blue",
+"res://data/": "pink",
 "res://levels/": "orange",
-"res://scripts/": "orange"
+"res://scenes/": "blue",
+"res://scripts/": "yellow",
+"res://ui/": "teal"
 }
 
 [input]

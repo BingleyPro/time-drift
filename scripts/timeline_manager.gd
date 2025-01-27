@@ -1,10 +1,6 @@
 extends Node
 
-@export var past_layer: Node3D
-@export var present_layer: Node3D
-
 @export var timeline_layers: Array[Node3D]
-#@export var initial_position: Vector3 = Vector3.ZERO
 @export var player: CharacterBody3D
 
 # Track the current timeline that the player is in
