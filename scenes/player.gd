@@ -8,6 +8,8 @@ enum CharacterState {
 }
 var hud: Node = null
 
+@export var timeline_manager: Node
+
 # All of the actually important stuff
 @onready var head := $head
 @onready var plrGUI := $PlayerGUI
@@ -177,6 +179,7 @@ func _update_stamina(delta: float) -> void:
 			stamina_bar.value = current_stamina
 
 # TIME TRAVEL
-func _process(delta):
-	if Input.is_action_just_pressed("switch_timeline"):
-		timeline_manager.switch_timeline()
+#func _process(delta):
+#	if Input.is_action_just_pressed("switch_timeline"):
+#		var new_index = (current_timeline_index + 1) % timeline_layers.size()
+#		switch_timeline(new_index)

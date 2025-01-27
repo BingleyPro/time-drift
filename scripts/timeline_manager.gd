@@ -3,34 +3,45 @@ extends Node
 @export var past_layer: Node3D
 @export var present_layer: Node3D
 
-# Track the current timeline that the player is in
-var current_timeline = "present"
+@export var timeline_layers: Array[Node3D]
+#@export var initial_position: Vector3 = Vector3.ZERO
+@export var player: CharacterBody3D
 
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	switch_to("present")
-#	
-func switch_timeline():
-	if current_timeline == "present":
-		switch_to("past")
-	else:
-		switch_to("present")
+# Track the current timeline that the player is in
+var current_timeline_index = 0
+
+func _ready():
+	if timeline_layers.is_empty():
+		push_error("No timeline layers assigned!")
+		return
 		
-func switch_to(timeline):
-	if timeline == "past":
-		past_layer.visible = true
-		present_layer.visible = false
-		_set_collision_enabled(past_layer, true)
-		_set_collision_enabled(present_layer, false)
-		current_timeline = "past"
-	else:
-		past_layer.visible = false
-		present_layer.visible = true
-		_set_collision_enabled(past_layer, false)
-		_set_collision_enabled(present_layer, true)
-		current_timeline = "present"
+	# Align all layers to the same position at runtime
+	for layer in timeline_layers:
+		if layer:
+			#layer.global_transform.origin = initial_position
+			layer.visible = false
+			
+	# Show the starting timeline
+	switch_timeline(0)
+
+func switch_timeline(index: int):
+	if index < 0 or index >= timeline_layers.size():
+		push_error("Invalid timeline index")
+		return
 		
-func _set_collision_enabled(layer, enabled):
-	for node in layer.get_children():
-		if node is CollisionObject3D:
-			node.set_deferred("disabled", !enabled)
+	# Hide all other layers
+	for i in range(timeline_layers.size()):
+		timeline_layers[i].visible = (i == index)
+		
+	# Set player's collision mask to match the active timeline
+	if index == 0:  # Present timeline
+			player.collision_mask = 0b0001  # Binary for Layer 1 (Present)
+	if index == 1:  # Past timeline
+			player.collision_mask = 0b0010  # Binary for Layer 2 (Past)
+	
+	current_timeline_index = index
+
+func _input(event):
+	if event.is_action_pressed("switch_timeline"):
+		var new_index = (current_timeline_index + 1) % timeline_layers.size()
+		switch_timeline(new_index)
