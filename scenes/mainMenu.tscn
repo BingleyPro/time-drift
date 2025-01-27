@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_2s5sd"]
 [ext_resource type="PackedScene" uid="uid://bi1xukieabk6q" path="res://scenes/SettingsWindow.tscn" id="2_m3nvr"]
-[ext_resource type="Texture2D" uid="uid://b45xqowst1x1c" path="res://assets/play.png" id="3_sk3k6"]
-[ext_resource type="Texture2D" uid="uid://2iyqbva1isvd" path="res://assets/settings.png" id="4_abekx"]
-[ext_resource type="Texture2D" uid="uid://bdt54rsmwvrem" path="res://assets/exit.png" id="4_jgski"]
+[ext_resource type="Texture2D" uid="uid://b3m4o386x7oq5" path="res://assets/play.png" id="3_sk3k6"]
+[ext_resource type="Texture2D" uid="uid://jdysdvmyyplf" path="res://assets/settings.png" id="4_abekx"]
+[ext_resource type="Texture2D" uid="uid://e6m67rbl4fnj" path="res://assets/exit.png" id="4_jgski"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -36,7 +36,7 @@ layout_mode = 2
 text = " "
 
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Button"]
-position = Vector2(110, 12)
+position = Vector2(112, 16)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_sk3k6")
 
@@ -45,7 +45,7 @@ layout_mode = 2
 text = " "
 
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Button2"]
-position = Vector2(110, 17)
+position = Vector2(112, 15)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_abekx")
 
@@ -54,10 +54,8 @@ layout_mode = 2
 text = " "
 
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Button3"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-position = Vector2(110, 14)
-scale = Vector2(0.1, 0.1)
+position = Vector2(110, 15)
+scale = Vector2(0.107778, 0.112222)
 texture = ExtResource("4_jgski")
 
 [node name="Settings" parent="." instance=ExtResource("2_m3nvr")]
