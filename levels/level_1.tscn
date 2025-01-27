@@ -4,6 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_awnm3"]
 [ext_resource type="Script" path="res://scripts/timeline_manager.gd" id="3_6lso0"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_bn63v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e5qeh"]
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jkji4"]
 sky_top_color = Color(0.178285, 0.497917, 0.549767, 1)
 sky_horizon_color = Color(0.594571, 0.666729, 0.670692, 1)
@@ -18,11 +22,62 @@ sky = SubResource("Sky_yyedr")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bn63v"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_e5qeh"]
-
 [node name="Level 1" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 5)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_bn63v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_e5qeh")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Floor2" type="StaticBody3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 20, 0, 4, 4)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
+shape = SubResource("BoxShape3D_bn63v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2"]
+mesh = SubResource("BoxMesh_e5qeh")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 12, 3.5, 2, 0)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("BoxShape3D_bn63v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+mesh = SubResource("BoxMesh_e5qeh")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Wall2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 12, -3.5, 2, 0)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
+shape = SubResource("BoxShape3D_bn63v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2"]
+mesh = SubResource("BoxMesh_e5qeh")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Wall3" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 6, 0, 5, 0, -1, 0, -2.62268e-07, 0, 2, -5.5)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3"]
+shape = SubResource("BoxShape3D_bn63v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3"]
+mesh = SubResource("BoxMesh_e5qeh")
+skeleton = NodePath("../CollisionShape3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qpa8f")
@@ -39,56 +94,6 @@ timeline_manager = NodePath("../TimelineManager")
 
 [node name="Past Layer" type="Node3D" parent="."]
 
-[node name="Floor" type="StaticBody3D" parent="Past Layer"]
-transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Past Layer/Floor"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Past Layer/Floor"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="Floor2" type="StaticBody3D" parent="Past Layer"]
-transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 20, 0, 4, 4)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Past Layer/Floor2"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Past Layer/Floor2"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="Wall" type="StaticBody3D" parent="Past Layer"]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 12, 3.5, 2, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Past Layer/Wall"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Past Layer/Wall"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="Wall2" type="StaticBody3D" parent="Past Layer"]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 12, -3.5, 2, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Past Layer/Wall2"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Past Layer/Wall2"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="Wall3" type="StaticBody3D" parent="Past Layer"]
-transform = Transform3D(-4.37114e-08, 0, 6, 0, 5, 0, -1, 0, -2.62268e-07, 0, 2, -5.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Past Layer/Wall3"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Past Layer/Wall3"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
-
 [node name="Wall4" type="StaticBody3D" parent="Past Layer"]
 transform = Transform3D(-4.37114e-08, 0, 6, 0, 5, 0, -1, 0, -2.62268e-07, 0, 2, 5.5)
 
@@ -101,50 +106,6 @@ skeleton = NodePath("../CollisionShape3D")
 
 [node name="Present Layer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.50951, 0, 0)
-
-[node name="Floor2" type="StaticBody3D" parent="Present Layer"]
-transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 15, -2.50951, -1, 1)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Present Layer/Floor2"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Present Layer/Floor2"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="Wall5" type="StaticBody3D" parent="Present Layer"]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 12, 0.990493, 2, 0)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Present Layer/Wall5"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Present Layer/Wall5"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="Wall6" type="StaticBody3D" parent="Present Layer"]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 12, -6.00951, 2, 0)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Present Layer/Wall6"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Present Layer/Wall6"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="Wall7" type="StaticBody3D" parent="Present Layer"]
-transform = Transform3D(-4.37114e-08, 0, 6, 0, 5, 0, -1, 0, -2.62268e-07, -2.50951, 2, -5.5)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Present Layer/Wall7"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Present Layer/Wall7"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
 
 [node name="TimelineManager" type="Node" parent="." node_paths=PackedStringArray("past_layer", "present_layer", "timeline_layers", "player")]
 script = ExtResource("3_6lso0")
