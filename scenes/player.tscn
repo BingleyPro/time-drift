@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://brpt71jl5cg2q"]
+[gd_scene load_steps=11 format=3 uid="uid://brpt71jl5cg2q"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_yofdb"]
 [ext_resource type="PackedScene" uid="uid://c6wmqp0buuk5m" path="res://scenes/PlayerGUI.tscn" id="2_ywley"]
@@ -8,6 +8,8 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p0oft"]
 radius = 0.149786
 height = 0.601342
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q41tv"]
 
 [sub_resource type="Animation" id="Animation_fnymu"]
 length = 0.001
@@ -70,9 +72,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5)
 }
 
+[sub_resource type="Animation" id="Animation_w0me1"]
+resource_name = "arm time"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_auuwx"]
 _data = {
 "RESET": SubResource("Animation_fnymu"),
+"arm time": SubResource("Animation_w0me1"),
 "crouch": SubResource("Animation_nuoua"),
 "sprint": SubResource("Animation_px50k")
 }
@@ -98,6 +104,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0026046, 0)
 target_position = Vector3(0, 0, -0.91)
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="arm" type="StaticBody3D" parent="head"]
+transform = Transform3D(0.061615, 0, 0, 0, -0.0210299, 0.080945, 0, -0.154808, -0.010996, 0.153604, -0.182389, -0.168578)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="head/arm"]
+transform = Transform3D(0.97411, 0.218809, 0.0568478, -0.218809, 0.975747, -0.00630095, -0.0568478, -0.00630097, 0.998363, -0.375921, -0.0228071, 0.321092)
+mesh = SubResource("CapsuleMesh_q41tv")
+skeleton = NodePath("")
 
 [node name="PlayerGUI" parent="." instance=ExtResource("2_ywley")]
 
