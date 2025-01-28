@@ -8,17 +8,19 @@ enum CharacterState {
 }
 var hud: Node = null
 
-@export var timeline_manager: Node
-
 # All of the actually important stuff
 @onready var head := $head
 @onready var plrGUI := $PlayerGUI
 @onready var InteractRaycast := $head/RayCast3D
 @onready var camera := $head/Camera3D
 @onready var animator := $AnimationPlayer
+@onready var timeline_manager := get_parent().get_node("TimelineManager")
 var currentBody : Interactible3D = null
 var currentState : CharacterState = CharacterState.WALKING
 @onready var SPEED = DEFAULT_SPEED # DEFAULT_SPEED doesn't load until _ready(), so we have to use @onready (you could also just move SPEED a bit to the bottom)
+
+var is_arm_up = false
+var selecting_timeline = false
 
 # Options
 @export var DEFAULT_SPEED := 3
@@ -111,6 +113,28 @@ func _unhandled_input(event : InputEvent):
 		mouseInput.y += event.relative.y
 		self.rotation_degrees.y -= mouseInput.x * mouse_sensitivity
 		head.rotation_degrees.x -= mouseInput.y * mouse_sensitivity
+	
+	if event is InputEventKey:
+		if event.pressed and event.keycode == Key.KEY_T:
+			if not is_arm_up:
+				animator.play("arm")
+				is_arm_up = true
+				selecting_timeline = true
+			else:
+				animator.play_backwards("arm")
+				is_arm_up = false
+				selecting_timeline = false
+	elif selecting_timeline and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			timeline_manager.next_timeline()
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			timeline_manager.previous_timeline()
+	elif selecting_timeline and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		timeline_manager.select_current_timeline()
+		animator.play_backwards("arm")
+		is_arm_up = false
+		selecting_timeline = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 #endregion
 

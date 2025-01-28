@@ -41,3 +41,28 @@ func _input(event):
 	if event.is_action_pressed("switch_timeline"):
 		var new_index = (current_timeline_index + 1) % timeline_layers.size()
 		switch_timeline(new_index)
+
+var selected_timeline = 0
+
+func next_timeline():
+	selected_timeline = (selected_timeline + 1) % timeline_layers.size()
+	highlight_timeline(selected_timeline)
+
+func previous_timeline():
+	selected_timeline = (selected_timeline - 1 + timeline_layers.size()) % timeline_layers.size()
+	highlight_timeline(selected_timeline)
+
+func select_current_timeline():
+	switch_timeline(selected_timeline)
+	change_scene(timeline_layers[selected_timeline])
+
+func highlight_timeline(_index: int):
+	# Implement visual feedback for the selected timeline
+	pass
+
+func change_scene(timeline: Node3D):
+	# Change to the selected timeline's scene
+	var scene_path = timeline.get("scene_path")
+	var new_scene = load(scene_path)
+	if new_scene:
+		get_tree().change_scene_to(new_scene)
