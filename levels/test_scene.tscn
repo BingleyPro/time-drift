@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://eajra2evi4mo"]
+
+[ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_s1axy"]
+[ext_resource type="PackedScene" uid="uid://bq864afmgrexa" path="res://scenes/HUD.tscn" id="2_hrxwd"]
+[ext_resource type="Script" path="res://scripts/new_timeline_manager.gd" id="3_5t0b7"]
+[ext_resource type="PackedScene" uid="uid://dwsw2cnopy04g" path="res://scenes/building/wall.tscn" id="4_hh1x5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bn63v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e5qeh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jkji4"]
+sky_top_color = Color(0.178285, 0.497917, 0.549767, 1)
+sky_horizon_color = Color(0.594571, 0.666729, 0.670692, 1)
+ground_horizon_color = Color(0.594571, 0.666729, 0.670692, 1)
+
+[sub_resource type="Sky" id="Sky_yyedr"]
+sky_material = SubResource("ProceduralSkyMaterial_jkji4")
+
+[sub_resource type="Environment" id="Environment_qpa8f"]
+background_mode = 2
+sky = SubResource("Sky_yyedr")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level 1" type="Node3D"]
+script = ExtResource("3_5t0b7")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 26.4, 0, -1, 5)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_bn63v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_e5qeh")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Floor2" type="StaticBody3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 26, 0, 4, 5)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
+shape = SubResource("BoxShape3D_bn63v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2"]
+mesh = SubResource("BoxMesh_e5qeh")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qpa8f")
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 1.15
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_s1axy")]
+
+[node name="HUD" parent="." instance=ExtResource("2_hrxwd")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0336785, 0.999433, 0, -0.999433, -0.0336785, 0, 3.43348, 0.201369)
+
+[node name="Wall" parent="." instance=ExtResource("4_hh1x5")]
+transform = Transform3D(1.00404, 0, 0, 0, 1.00404, 0, 0, 0, 1.00404, 0, 0, -2)

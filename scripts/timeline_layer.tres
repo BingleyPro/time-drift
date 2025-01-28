@@ -1,6 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://rl17ttqd4aem"]
-
-[ext_resource type="Script" path="res://scripts/timeline_layer.gd" id="1_pfkc4"]
-
-[resource]
-script = ExtResource("1_pfkc4")

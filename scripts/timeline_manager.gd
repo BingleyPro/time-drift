@@ -11,10 +11,8 @@ func _ready():
 		push_error("No timeline layers assigned!")
 		return
 		
-	# Align all layers to the same position at runtime
 	for layer in timeline_layers:
 		if layer:
-			#layer.global_transform.origin = initial_position
 			layer.visible = false
 			
 	# Show the starting timeline
@@ -31,9 +29,13 @@ func switch_timeline(index: int):
 		
 	# Set player's collision mask to match the active timeline
 	if index == 0:  # Present timeline
-			player.collision_mask = 0b0001  # Binary for Layer 1 (Present)
+			player.collision_mask = 0b0001  # Binary for Layer 1
 	if index == 1:  # Past timeline
-			player.collision_mask = 0b0010  # Binary for Layer 2 (Past)
+			player.collision_mask = 0b0010  # Binary for Layer 2
+	if index == 2:  # Present timeline
+			player.collision_mask = 0b0011  # Binary for Layer 3
+	if index == 3:  # Past timeline
+			player.collision_mask = 0b0100  # Binary for Layer 4
 	
 	current_timeline_index = index
 
