@@ -127,6 +127,7 @@ func _unhandled_input(event : InputEvent):
 	elif selecting_timeline and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			timeline_manager.next_timeline()
+			
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			timeline_manager.previous_timeline()
 	elif selecting_timeline and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
