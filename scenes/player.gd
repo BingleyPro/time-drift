@@ -14,7 +14,7 @@ var hud: Node = null
 @onready var InteractRaycast := $head/RayCast3D
 @onready var camera := $head/Camera3D
 @onready var animator := $AnimationPlayer
-@onready var timeline_manager := get_parent().get_node("TimelineManager")
+@onready var timeline_manager = get_node("/root/TimeManager")
 var currentBody : Interactible3D = null
 var currentState : CharacterState = CharacterState.WALKING
 @onready var SPEED = DEFAULT_SPEED # DEFAULT_SPEED doesn't load until _ready(), so we have to use @onready (you could also just move SPEED a bit to the bottom)
@@ -118,6 +118,7 @@ func _unhandled_input(event : InputEvent):
 	
 	if event is InputEventKey:
 		if event.pressed and event.keycode == Key.KEY_T:
+			# Toggle the "arm" animation and timeline selection
 			if not is_arm_up:
 				animator.play("arm")
 				is_arm_up = true
@@ -129,26 +130,29 @@ func _unhandled_input(event : InputEvent):
 				selecting_timeline = false
 				timeline_manager.cancel_timeline_selection()
 
+	# If we are in selection mode, detect mouse wheel or click input
 	elif selecting_timeline and event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-			scroll_accumulation += 1
-			if scroll_accumulation >= SCROLL_THRESHOLD:
-				scroll_accumulation = 0
-				timeline_manager.next_timeline()
-		
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-			scroll_accumulation -= 1
-			if scroll_accumulation <= -SCROLL_THRESHOLD:
-				scroll_accumulation = 0
-				timeline_manager.previous_timeline()
+		if event.pressed:
+			match event.button_index:
+				MOUSE_BUTTON_WHEEL_UP:
+					scroll_accumulation += 1
+					if scroll_accumulation >= SCROLL_THRESHOLD:
+						scroll_accumulation = 0
+						timeline_manager.next_timeline()
 
-		# Left-click to finalize timeline choice
-		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			timeline_manager.select_current_timeline()
-			animator.play_backwards("arm")
-			is_arm_up = false
-			selecting_timeline = false
-			scroll_accumulation = 0
+				MOUSE_BUTTON_WHEEL_DOWN:
+					scroll_accumulation -= 1
+					if scroll_accumulation <= -SCROLL_THRESHOLD:
+						scroll_accumulation = 0
+						timeline_manager.previous_timeline()
+
+				# Left-click finalizes the timeline choice
+				MOUSE_BUTTON_LEFT:
+					timeline_manager.select_current_timeline()
+					animator.play_backwards("arm")
+					is_arm_up = false
+					selecting_timeline = false
+					scroll_accumulation = 0
 
 #endregion
 

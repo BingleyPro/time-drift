@@ -10,12 +10,13 @@ extends Node
 func _ready () -> void:
 	# Connect to the timeline_changed signal
 	var time_manager = get_node("/root/TimeManager")
-	time_manager.connect("timeline_changed", Callable(self, "on_timeline_changed"))
+	time_manager.connect("timeline_changed", Callable(self, "_on_timeline_changed"))
 	
 	# Make sure inital state matches current timeline
 	_on_timeline_changed(time_manager.current_timeline)
 
 func _on_timeline_changed(new_timeline) -> void:
+	print("Timeline changed to: ", new_timeline)
 	# Hide all layers first
 	past_node.visible = false
 	present_node.visible = false
@@ -23,9 +24,11 @@ func _on_timeline_changed(new_timeline) -> void:
 	
 	# Show only the relevant layer
 	match new_timeline:
-		"PAST":
+		TimeManager.Timeline.PAST:
 			past_node.visible = true
-		"PRESENT":
+		TimeManager.Timeline.PRESENT:
 			present_node.visible = true
-		"FUTURE":
+		TimeManager.Timeline.FUTURE:
 			future_node.visible = true
+		_:
+			print("Unknown timeline: ", new_timeline)
