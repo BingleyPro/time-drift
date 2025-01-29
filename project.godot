@@ -120,6 +120,6 @@ switch_to_future={
 
 [layer_names]
 
-3d_physics/layer_1="Present"
-3d_physics/layer_2="Past"
+3d_physics/layer_1="Past"
+3d_physics/layer_2="Present"
 3d_physics/layer_3="Future"
