@@ -221,3 +221,16 @@ func _update_stamina(delta: float) -> void:
 #	if Input.is_action_just_pressed("switch_timeline"):
 #		var new_index = (current_timeline_index + 1) % timeline_layers.size()
 #		switch_timeline(new_index)
+
+func set_player_collision_mask(player: CharacterBody3D, timeline_enum: int) -> void:
+	var new_mask = 0
+	
+	match timeline_enum:
+		0: # Past
+			new_mask = 1
+		1: # Present
+			new_mask = 2
+		2: # Future
+			new_mask = 4
+			
+	player.collision_mask = new_mask

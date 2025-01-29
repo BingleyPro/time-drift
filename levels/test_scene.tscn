@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://eajra2evi4mo"]
+[gd_scene load_steps=9 format=3 uid="uid://eajra2evi4mo"]
 
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_s1axy"]
 [ext_resource type="PackedScene" uid="uid://bq864afmgrexa" path="res://scenes/HUD.tscn" id="2_hrxwd"]
-[ext_resource type="Script" path="res://scripts/new_timeline_manager.gd" id="3_5t0b7"]
 [ext_resource type="PackedScene" uid="uid://dwsw2cnopy04g" path="res://scenes/building/wall.tscn" id="4_hh1x5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bn63v"]
@@ -24,7 +23,6 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Level 1" type="Node3D"]
-script = ExtResource("3_5t0b7")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 26.4, 0, -1, 5)
