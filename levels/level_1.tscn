@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2i7ad6vadc21"]
+[gd_scene load_steps=13 format=3 uid="uid://b2i7ad6vadc21"]
 
 [ext_resource type="PackedScene" uid="uid://bq864afmgrexa" path="res://scenes/HUD.tscn" id="1_1o0q2"]
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_awnm3"]
@@ -25,6 +25,10 @@ glow_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_1gfn3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ktexd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_its5w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hom85"]
 
 [node name="Level 1" type="Node3D"]
 
@@ -244,11 +248,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.75943)
 collision_layer = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Future Layer/RigidBody3D"]
+layers = 4
 mesh = SubResource("BoxMesh_1gfn3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Future Layer/RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000744462, 0, 0.00206125)
 shape = SubResource("BoxShape3D_ktexd")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="Future Layer"]
+collision_layer = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Future Layer/RigidBody3D2"]
+layers = 4
+mesh = SubResource("SphereMesh_its5w")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Future Layer/RigidBody3D2"]
+shape = SubResource("SphereShape3D_hom85")
 
 [node name="TimelineManager" type="Node" parent="." node_paths=PackedStringArray("timeline_layers", "player")]
 script = ExtResource("3_6lso0")
