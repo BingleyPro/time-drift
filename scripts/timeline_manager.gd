@@ -39,10 +39,10 @@ func switch_timeline(index: int):
 	
 	current_timeline_index = index
 
-func _input(event):
-	if event.is_action_pressed("switch_timeline"):
-		var new_index = (current_timeline_index + 1) % timeline_layers.size()
-		switch_timeline(new_index)
+#func _input(event):
+	#if event.is_action_pressed("switch_timeline"):
+	#	var new_index = (current_timeline_index + 1) % timeline_layers.size()
+	#	switch_timeline(new_index)
 
 var selected_timeline = 0
 var selecting = false
@@ -88,8 +88,13 @@ func highlight_timeline(_index: int):
 		layer.visible = (i == _index) or (selecting and i == selected_timeline)
 
 func change_scene(timeline: Node3D):
-	# Change to the selected timeline's scene
 	var scene_path = timeline.get("scene_path")
+	if scene_path == null or scene_path == "":
+		push_error("scene_path is null or empty.")
+		return
+	
 	var new_scene = load(scene_path)
 	if new_scene:
 		get_tree().change_scene_to(new_scene)
+	else:
+		push_error("Could not load scene: " + str(scene_path) + " .")

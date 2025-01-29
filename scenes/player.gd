@@ -38,6 +38,8 @@ var is_sprinting := false # is the player sprinting
 var inputEnabled := true # can the player move?
 var aimlookEnabled := true # can the player look around?
 var interactionsEnabled := true # can the player interact with Interactibles3D?
+var scroll_accumulation := 0
+var SCROLL_THRESHOLD := 3
 
 #region Main control flow 
 
@@ -126,16 +128,27 @@ func _unhandled_input(event : InputEvent):
 				is_arm_up = false
 				selecting_timeline = false
 				timeline_manager.cancel_timeline_selection()
+
 	elif selecting_timeline and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-			timeline_manager.next_timeline()
+			scroll_accumulation += 1
+			if scroll_accumulation >= SCROLL_THRESHOLD:
+				scroll_accumulation = 0
+				timeline_manager.next_timeline()
+		
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-			timeline_manager.previous_timeline()
-	elif selecting_timeline and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		timeline_manager.select_current_timeline()
-		animator.play_backwards("arm")
-		is_arm_up = false
-		selecting_timeline = false
+			scroll_accumulation -= 1
+			if scroll_accumulation <= -SCROLL_THRESHOLD:
+				scroll_accumulation = 0
+				timeline_manager.previous_timeline()
+
+		# Left-click to finalize timeline choice
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			timeline_manager.select_current_timeline()
+			animator.play_backwards("arm")
+			is_arm_up = false
+			selecting_timeline = false
+			scroll_accumulation = 0
 
 #endregion
 
