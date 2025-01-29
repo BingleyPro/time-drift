@@ -107,7 +107,7 @@ func _unhandled_input(event : InputEvent):
 	if !aimlookEnabled:
 		return
 	
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion:
 		var mouseInput : Vector2
 		mouseInput.x += event.relative.x
 		mouseInput.y += event.relative.y
@@ -120,14 +120,15 @@ func _unhandled_input(event : InputEvent):
 				animator.play("arm")
 				is_arm_up = true
 				selecting_timeline = true
+				timeline_manager.start_timeline_selection()
 			else:
 				animator.play_backwards("arm")
 				is_arm_up = false
 				selecting_timeline = false
+				timeline_manager.cancel_timeline_selection()
 	elif selecting_timeline and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			timeline_manager.next_timeline()
-			
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			timeline_manager.previous_timeline()
 	elif selecting_timeline and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -135,7 +136,6 @@ func _unhandled_input(event : InputEvent):
 		animator.play_backwards("arm")
 		is_arm_up = false
 		selecting_timeline = false
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 #endregion
 

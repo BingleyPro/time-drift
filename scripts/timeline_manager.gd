@@ -45,22 +45,47 @@ func _input(event):
 		switch_timeline(new_index)
 
 var selected_timeline = 0
+var selecting = false
+
+func start_timeline_selection():
+	selecting = true
+	selected_timeline = current_timeline_index
+	highlight_timeline(selected_timeline)
+
+func cancel_timeline_selection():
+	selecting = false
+	highlight_timeline(current_timeline_index)
 
 func next_timeline():
+	if not selecting:
+		return
 	selected_timeline = (selected_timeline + 1) % timeline_layers.size()
 	highlight_timeline(selected_timeline)
 
 func previous_timeline():
+	if not selecting:
+		return
 	selected_timeline = (selected_timeline - 1 + timeline_layers.size()) % timeline_layers.size()
 	highlight_timeline(selected_timeline)
 
 func select_current_timeline():
+	if not selecting:
+		return
 	switch_timeline(selected_timeline)
 	change_scene(timeline_layers[selected_timeline])
 
 func highlight_timeline(_index: int):
-	# Implement visual feedback for the selected timeline
-	pass
+	for i in range(timeline_layers.size()):
+		var layer = timeline_layers[i]
+		# Get a MeshInstance3D child
+		var mesh_instance = layer.get_node("MeshInstance3D") if layer.has_node("MeshInstance3D") else null
+		if mesh_instance:
+			var new_color = mesh_instance.modulate
+			new_color.a = 0.5 if (i == _index and selecting) else 1.0
+			mesh_instance.modulate = new_color
+
+		# Set visibility as needed
+		layer.visible = (i == _index) or (selecting and i == selected_timeline)
 
 func change_scene(timeline: Node3D):
 	# Change to the selected timeline's scene
