@@ -56,7 +56,22 @@ transform = Transform3D(1, 0, 0, 0, -0.0336785, 0.999433, 0, -0.999433, -0.03367
 
 [node name="Wall" parent="." instance=ExtResource("4_hh1x5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68, 0.655041, -2)
+propagate_past_changes = null
+exists_in_past = null
+exists_in_present = null
 exists_in_future = false
+past_properties = null
+broken_in_past = null
+broken_in_present = null
+broken_in_future = null
 
 [node name="Floor" parent="." instance=ExtResource("5_kix0a")]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 10, -1.854, 0, 1.403)
+propagate_past_changes = null
+exists_in_past = null
+exists_in_present = null
+exists_in_future = null
+past_properties = null
+broken_in_past = null
+broken_in_present = null
+broken_in_future = null
