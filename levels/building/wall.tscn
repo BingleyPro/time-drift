@@ -15,12 +15,12 @@ albedo_color = Color(0.706219, 0.625526, 0.562446, 1)
 albedo_color = Color(0.48672, 0.667822, 0.553837, 1)
 
 [node name="Wall" type="Node3D"]
-transform = Transform3D(1.00404, 0, 0, 0, 1.00404, 0, 0, 0, 1.00404, 0, 0, 0)
 script = ExtResource("1_pj5fc")
 
 [node name="Past" type="Node3D" parent="."]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Past"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000792027, -0.00441599, 0.00105619)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Past/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0)
@@ -35,6 +35,7 @@ shape = SubResource("BoxShape3D_3lwda")
 [node name="Present" type="Node3D" parent="."]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Present"]
+collision_layer = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Present/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0)
@@ -49,6 +50,7 @@ shape = SubResource("BoxShape3D_3lwda")
 [node name="Future" type="Node3D" parent="."]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Future"]
+collision_layer = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Future/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0)

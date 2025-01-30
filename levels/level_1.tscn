@@ -33,7 +33,7 @@ glow_enabled = true
 [node name="Level 1" type="Node3D"]
 
 [node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 26.4, 0, -1, 5)
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 26.4, 0.000768185, -1, 4.99958)
 collision_layer = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://eajra2evi4mo"]
+[gd_scene load_steps=11 format=3 uid="uid://eajra2evi4mo"]
 
 [ext_resource type="Script" path="res://autoload/time_manager.gd" id="1_dxwre"]
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_s1axy"]
 [ext_resource type="PackedScene" uid="uid://bq864afmgrexa" path="res://scenes/HUD.tscn" id="2_hrxwd"]
-[ext_resource type="PackedScene" uid="uid://dwsw2cnopy04g" path="res://scenes/building/wall.tscn" id="4_hh1x5"]
+[ext_resource type="PackedScene" uid="uid://dwsw2cnopy04g" path="res://levels/building/wall.tscn" id="4_hh1x5"]
+[ext_resource type="PackedScene" uid="uid://b857alwrt68xy" path="res://levels/building/floor.tscn" id="5_kix0a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bn63v"]
 
@@ -26,17 +27,6 @@ glow_enabled = true
 [node name="Level 1" type="Node3D"]
 script = ExtResource("1_dxwre")
 
-[node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 26.4, 0, -1, 5)
-collision_layer = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_bn63v")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-mesh = SubResource("BoxMesh_e5qeh")
-skeleton = NodePath("../CollisionShape3D")
-
 [node name="Floor2" type="StaticBody3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 26, 0, 4, 5)
 collision_layer = 3
@@ -57,6 +47,7 @@ light_energy = 1.15
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_s1axy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72928, 0.19042, 0)
 
 [node name="HUD" parent="." instance=ExtResource("2_hrxwd")]
 
@@ -64,4 +55,8 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, -0.0336785, 0.999433, 0, -0.999433, -0.0336785, 0, 3.43348, 0.201369)
 
 [node name="Wall" parent="." instance=ExtResource("4_hh1x5")]
-transform = Transform3D(1.00404, 0, 0, 0, 1.00404, 0, 0, 0, 1.00404, 0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68, 0.655041, -2)
+exists_in_future = false
+
+[node name="Floor" parent="." instance=ExtResource("5_kix0a")]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 10, -1.854, 0, 1.403)
