@@ -38,7 +38,7 @@ var is_sprinting := false # is the player sprinting
 var inputEnabled := true # can the player move?
 var aimlookEnabled := true # can the player look around?
 var interactionsEnabled := true # can the player interact with Interactibles3D?
-var scroll_accumulation := 0
+var scroll_accumulation := 0.0
 var SCROLL_THRESHOLD := 3
 
 #region Main control flow 
@@ -111,8 +111,7 @@ func _unhandled_input(event : InputEvent):
 	
 	if event is InputEventMouseMotion:
 		var mouseInput : Vector2
-		mouseInput.x += event.relative.x
-		mouseInput.y += event.relative.y
+		mouseInput += event.relative
 		self.rotation_degrees.y -= mouseInput.x * mouse_sensitivity
 		head.rotation_degrees.x -= mouseInput.y * mouse_sensitivity
 	
@@ -130,29 +129,36 @@ func _unhandled_input(event : InputEvent):
 				selecting_timeline = false
 				timeline_manager.cancel_timeline_selection()
 
-	# If we are in selection mode, detect mouse wheel or click input
-	elif selecting_timeline and event is InputEventMouseButton:
-		if event.pressed:
+	# Handle all types of scroll input when selecting timeline
+	elif selecting_timeline:
+		if event is InputEventMouseButton and event.pressed:
 			match event.button_index:
 				MOUSE_BUTTON_WHEEL_UP:
-					scroll_accumulation += 1
-					if scroll_accumulation >= SCROLL_THRESHOLD:
-						scroll_accumulation = 0
-						timeline_manager.next_timeline()
-
+					scroll_accumulation -= 5.0
 				MOUSE_BUTTON_WHEEL_DOWN:
-					scroll_accumulation -= 1
-					if scroll_accumulation <= -SCROLL_THRESHOLD:
-						scroll_accumulation = 0
-						timeline_manager.previous_timeline()
-
-				# Left-click finalizes the timeline choice
+					scroll_accumulation += 5.0
 				MOUSE_BUTTON_LEFT:
 					timeline_manager.select_current_timeline()
 					animator.play_backwards("arm")
 					is_arm_up = false
 					selecting_timeline = false
 					scroll_accumulation = 0
+		
+		# Handle trackpad gestures
+		elif event is InputEventPanGesture:
+			scroll_accumulation += event.delta.y * 100.0
+			print("Pan Gesture detected:", event.delta.y, "Accumulation:", scroll_accumulation)
+		
+		elif event is InputEventMouseMotion and event.relative.y != 0:
+			if Input.is_physical_key_pressed(Key.KEY_ALT):
+				scroll_accumulation += event.relative.y * 0.5
+		
+		if abs(scroll_accumulation) >= SCROLL_THRESHOLD:
+			if scroll_accumulation > 0:
+				timeline_manager.next_timeline()
+			else:
+				timeline_manager.previous_timeline()
+			scroll_accumulation = 0
 
 #endregion
 

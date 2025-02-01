@@ -36,6 +36,9 @@ func switch_timeline(index: int):
 			player.collision_mask = 0b0011  # Binary for Layer 3
 	if index == 3:  # Past timeline
 			player.collision_mask = 0b0100  # Binary for Layer 4
+
+	# highlight only the new timeline
+	highlight_timeline(index)
 	
 	current_timeline_index = index
 
@@ -77,15 +80,24 @@ func select_current_timeline():
 func highlight_timeline(_index: int):
 	for i in range(timeline_layers.size()):
 		var layer = timeline_layers[i]
-		# Get a MeshInstance3D child
-		var mesh_instance = layer.get_node("MeshInstance3D") if layer.has_node("MeshInstance3D") else null
-		if mesh_instance:
-			var new_color = mesh_instance.modulate
-			new_color.a = 0.5 if (i == _index and selecting) else 1.0
-			mesh_instance.modulate = new_color
 
-		# Set visibility as needed
+		_apply_highlight_to_node(layer, i == _index)
+
 		layer.visible = (i == _index) or (selecting and i == selected_timeline)
+
+func _apply_highlight_to_node(node: Node, highlight: bool) -> void:
+	if node is MeshInstance3D:
+		if node.material_override:
+			var new_material = node.material_override.duplicate()
+			if new_material.has_parameter("albedo_color"):
+				var color = new_material.get("albedo_color")
+				color.a = 0.5 if highlight else 1.0
+				new_material.set("albedo_color", color)
+			node.material_override = new_material
+	for child in node.get_children():
+		if child is Node:
+			_apply_highlight_to_node(child, highlight)
+
 
 func change_scene(timeline: Node3D):
 	var scene_path = timeline.get("scene_path")

@@ -259,6 +259,7 @@ shape = SubResource("BoxShape3D_ktexd")
 collision_layer = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Future Layer/RigidBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0332426, 0.0433019, 4.58597)
 layers = 4
 mesh = SubResource("SphereMesh_its5w")
 skeleton = NodePath("../CollisionShape3D")

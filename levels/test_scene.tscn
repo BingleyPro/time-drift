@@ -24,7 +24,7 @@ sky = SubResource("Sky_yyedr")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Level 1" type="Node3D"]
+[node name="Level 2" type="Node3D"]
 script = ExtResource("1_dxwre")
 
 [node name="Floor2" type="StaticBody3D" parent="."]
