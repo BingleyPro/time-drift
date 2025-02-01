@@ -36,6 +36,7 @@ shape = SubResource("BoxShape3D_3lwda")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Present"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+collision_layer = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Present/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0)
@@ -51,6 +52,7 @@ shape = SubResource("BoxShape3D_3lwda")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Future"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+collision_layer = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Future/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0)

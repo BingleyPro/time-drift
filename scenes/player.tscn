@@ -133,6 +133,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody3D"]
+collision_mask = 2
 script = ExtResource("1_yofdb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

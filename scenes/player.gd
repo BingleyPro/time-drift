@@ -1,6 +1,8 @@
 class_name PlayerCharacter
 extends CharacterBody3D
 
+enum Timeline { PAST, PRESENT, FUTURE }
+
 enum CharacterState {
 	WALKING = 0,
 	SPRINTING = 1,
@@ -53,6 +55,8 @@ func _ready():
 	
 	if hud == null:
 		push_error("HUD not found")
+		
+	timeline_manager.connect("timeline_changed", Callable(self, "update_player_collision"))
 
 func _physics_process(delta: float) -> void:
 	if !inputEnabled:
@@ -232,15 +236,15 @@ func _update_stamina(delta: float) -> void:
 #		var new_index = (current_timeline_index + 1) % timeline_layers.size()
 #		switch_timeline(new_index)
 
-func set_player_collision_mask(player: CharacterBody3D, timeline_enum: int) -> void:
+func update_player_collision(timeline_enum) -> void:
 	var new_mask = 0
 	
 	match timeline_enum:
-		0: # Past
+		Timeline.PAST: # Past
 			new_mask = 1
-		1: # Present
+		Timeline.PRESENT: # Present
 			new_mask = 2
-		2: # Future
+		Timeline.FUTURE: # Future
 			new_mask = 4
 			
-	player.collision_mask = new_mask
+	self.collision_mask = new_mask
