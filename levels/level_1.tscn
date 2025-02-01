@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bq864afmgrexa" path="res://scenes/HUD.tscn" id="1_1o0q2"]
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_awnm3"]
-[ext_resource type="Script" path="res://scripts/timeline_manager.gd" id="3_6lso0"]
+[ext_resource type="Script" path="res://scripts/timeline_manager.gd" id="3_bupcl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bn63v"]
 
@@ -267,10 +267,8 @@ skeleton = NodePath("../CollisionShape3D")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Future Layer/RigidBody3D2"]
 shape = SubResource("SphereShape3D_hom85")
 
-[node name="TimelineManager" type="Node" parent="." node_paths=PackedStringArray("timeline_layers", "player")]
-script = ExtResource("3_6lso0")
-timeline_layers = [NodePath("../Present Layer"), NodePath("../Past Layer"), NodePath("../Future Layer")]
-player = NodePath("../Player")
+[node name="TimelineManager" type="Node" parent="."]
+script = ExtResource("3_bupcl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0336785, 0.999433, 0, -0.999433, -0.0336785, 0, 3.43348, 0.201369)
