@@ -20,7 +20,7 @@ config/icon="res://icon.png"
 
 SettingsHandler="*res://scenes/autoload/SettingsHandler.gd"
 GameManager="*res://scenes/autoload/GameManager.gd"
-TimeManager="*res://autoload/time_manager.gd"
+TimeManager="*res://autoload/TimeManager.gd"
 
 [display]
 

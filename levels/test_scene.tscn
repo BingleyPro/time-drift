@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=4 uid="uid://eajra2evi4mo"]
+[gd_scene load_steps=24 format=4 uid="uid://eajra2evi4mo"]
 
-[ext_resource type="Script" path="res://autoload/time_manager.gd" id="1_dxwre"]
+[ext_resource type="Script" path="res://autoload/TimeManager.gd" id="1_dxwre"]
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_s1axy"]
+[ext_resource type="PackedScene" uid="uid://cwm8rllfkbooi" path="res://scenes/timeline_ui.tscn" id="2_euc7v"]
 [ext_resource type="PackedScene" uid="uid://bq864afmgrexa" path="res://scenes/HUD.tscn" id="2_hrxwd"]
 [ext_resource type="PackedScene" uid="uid://dwsw2cnopy04g" path="res://levels/building/wall.tscn" id="4_hh1x5"]
 [ext_resource type="PackedScene" uid="uid://b857alwrt68xy" path="res://levels/building/floor.tscn" id="5_kix0a"]
@@ -1708,3 +1709,5 @@ shape = SubResource("BoxShape3D_leb7r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="walls/big wall4/filler"]
 mesh = SubResource("BoxMesh_ei1f4")
+
+[node name="TimelineUI" parent="." instance=ExtResource("2_euc7v")]
