@@ -24,7 +24,14 @@ enum Property { NORMAL, BROKEN }
 @onready var present_node = $Present
 @onready var future_node = $Future
 
+@onready var past_body = $Past/RigidBody3D
+@onready var present_body = $Present/RigidBody3D
+@onready var future_body = $Future/RigidBody3D
+
 func _ready () -> void:
+	
+	past_body.set_as_toplevel
+	
 	# Connect to the timeline_changed signal
 	var time_manager = get_node("/root/TimeManager")
 	time_manager.connect("timeline_changed", Callable(self, "_on_timeline_changed"))
