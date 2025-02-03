@@ -118,6 +118,12 @@ func _unhandled_input(event : InputEvent):
 		mouseInput += event.relative
 		self.rotation_degrees.y -= mouseInput.x * mouse_sensitivity
 		head.rotation_degrees.x -= mouseInput.y * mouse_sensitivity
+		# Clamp vertical rotation
+		head.rotation_degrees.x = clamp(
+			head.rotation_degrees.x - mouseInput.y * mouse_sensitivity,
+			-89,
+			89
+		)
 	
 	if event is InputEventKey:
 		if event.pressed and event.keycode == Key.KEY_T:
