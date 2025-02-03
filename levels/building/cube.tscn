@@ -14,7 +14,7 @@ albedo_color = Color(0.470588, 1, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2huv"]
 albedo_color = Color(1, 0.373271, 0.500407, 1)
 
-[node name="Wall" type="Node3D"]
+[node name="Cube" type="Node3D"]
 script = ExtResource("1_h7l1u")
 
 [node name="Past" type="Node3D" parent="."]
@@ -34,6 +34,7 @@ skeleton = NodePath("")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Present"]
 collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Present/RigidBody3D"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
@@ -41,6 +42,7 @@ shape = SubResource("BoxShape3D_fjt3q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Present/RigidBody3D"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+layers = 2
 mesh = SubResource("BoxMesh_ebwqs")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_1i5cl")
@@ -49,6 +51,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1i5cl")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Future"]
 collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Future/RigidBody3D"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
@@ -56,6 +59,7 @@ shape = SubResource("BoxShape3D_3lwda")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Future/RigidBody3D"]
 transform = Transform3D(0.612727, 0, 0, 0, 0.612727, 0, 0, 0, 0.612727, 0, 0, 0)
+layers = 4
 mesh = SubResource("BoxMesh_ebwqs")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_e2huv")

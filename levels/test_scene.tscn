@@ -1,10 +1,10 @@
-[gd_scene load_steps=28 format=4 uid="uid://eajra2evi4mo"]
+[gd_scene load_steps=26 format=4 uid="uid://eajra2evi4mo"]
 
-[ext_resource type="Script" path="res://autoload/TimeManager.gd" id="1_dxwre"]
+[ext_resource type="Script" path="res://autoload/time_manager.gd" id="1_dxwre"]
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_s1axy"]
-[ext_resource type="PackedScene" uid="uid://cwm8rllfkbooi" path="res://scenes/timeline_ui.tscn" id="2_euc7v"]
+[ext_resource type="PackedScene" path="res://scenes/timeline_ui.tscn" id="2_euc7v"]
 [ext_resource type="PackedScene" uid="uid://bq864afmgrexa" path="res://scenes/HUD.tscn" id="2_hrxwd"]
-[ext_resource type="PackedScene" uid="uid://dwsw2cnopy04g" path="res://levels/building/wall.tscn" id="4_hh1x5"]
+[ext_resource type="PackedScene" uid="uid://cuy3lwhgkydeb" path="res://levels/building/wall.tscn" id="4_hh1x5"]
 [ext_resource type="PackedScene" uid="uid://b857alwrt68xy" path="res://levels/building/floor.tscn" id="5_kix0a"]
 [ext_resource type="PackedScene" uid="uid://c4iht3cuwunpe" path="res://levels/building/cube.tscn" id="8_pkj3f"]
 [ext_resource type="PackedScene" uid="uid://bp0tkbhut262q" path="res://levels/building/trees/tree.tscn" id="11_k03f2"]
@@ -152,10 +152,6 @@ data = PackedVector3Array(3.231, 3.0681, 7.6007, 2.1557, 3.0639, 7.5987, 2.874, 
 
 [sub_resource type="BoxMesh" id="BoxMesh_ei1f4"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_aqywk"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_1llok"]
-
 [node name="Level 2" type="Node3D"]
 script = ExtResource("1_dxwre")
 
@@ -164,7 +160,7 @@ environment = SubResource("Environment_qpa8f")
 
 [node name="Player" parent="." instance=ExtResource("1_s1axy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72928, 0.19042, 0)
-collision_layer = 4294967295
+collision_layer = 7
 
 [node name="HUD" parent="." instance=ExtResource("2_hrxwd")]
 
@@ -1722,17 +1718,5 @@ mesh = SubResource("BoxMesh_ei1f4")
 
 [node name="TimelineUI" parent="." instance=ExtResource("2_euc7v")]
 
-[node name="Wall2" parent="." instance=ExtResource("8_pkj3f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.07503, 0.558723, -0.138106)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.353367, 2.14287)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
-shape = SubResource("BoxShape3D_aqywk")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
-mesh = SubResource("BoxMesh_1llok")
-skeleton = NodePath("")
+[node name="Cube" parent="." instance=ExtResource("8_pkj3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.23654, 3)

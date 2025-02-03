@@ -247,10 +247,10 @@ func update_player_collision(timeline_enum) -> void:
 	
 	match timeline_enum:
 		Timeline.PAST: # Past
-			new_mask = 1
+			new_mask = 1 << 0
 		Timeline.PRESENT: # Present
-			new_mask = 2
+			new_mask = 1 << 1
 		Timeline.FUTURE: # Future
-			new_mask = 4
+			new_mask = 1 << 2
 			
 	self.collision_mask = new_mask
