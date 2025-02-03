@@ -1,13 +1,9 @@
-[gd_scene load_steps=39 format=4 uid="uid://eajra2evi4mo"]
+[gd_scene load_steps=28 format=4 uid="uid://eajra2evi4mo"]
 
 [ext_resource type="Script" path="res://autoload/TimeManager.gd" id="1_dxwre"]
 [ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_s1axy"]
-[ext_resource type="Script" path="res://scripts/time_object.gd" id="2_3srw4"]
 [ext_resource type="PackedScene" uid="uid://cwm8rllfkbooi" path="res://scenes/timeline_ui.tscn" id="2_euc7v"]
 [ext_resource type="PackedScene" uid="uid://bq864afmgrexa" path="res://scenes/HUD.tscn" id="2_hrxwd"]
-[ext_resource type="Texture2D" uid="uid://lw4fg15pper5" path="res://assets/stylised nature kit/Bark_NormalTree.png" id="2_ia8k3"]
-[ext_resource type="Texture2D" uid="uid://ed03ji47h2q6" path="res://assets/stylised nature kit/Bark_NormalTree_Normal.png" id="3_6k1k4"]
-[ext_resource type="Texture2D" uid="uid://d1a4mcjjxrysd" path="res://assets/stylised nature kit/Leaves_NormalTree_C.png" id="4_6ip5a"]
 [ext_resource type="PackedScene" uid="uid://dwsw2cnopy04g" path="res://levels/building/wall.tscn" id="4_hh1x5"]
 [ext_resource type="PackedScene" uid="uid://b857alwrt68xy" path="res://levels/building/floor.tscn" id="5_kix0a"]
 [ext_resource type="PackedScene" uid="uid://c4iht3cuwunpe" path="res://levels/building/cube.tscn" id="8_pkj3f"]
@@ -176,44 +172,9 @@ collision_layer = 4294967295
 transform = Transform3D(1, 0, 0, 0, -0.0336785, 0.999433, 0, -0.999433, -0.0336785, 0, 3.43348, 0.201369)
 shadow_enabled = true
 
-[node name="tree" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68, 0.655041, -2)
-script = ExtResource("2_3srw4")
-exists_in_past = false
-
-[node name="Past" type="Node3D" parent="tree"]
-
-[node name="Present" type="Node3D" parent="tree"]
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="tree/Present"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.3, 8)
-collision_layer = 2
-
-[node name="CommonTree_2" type="MeshInstance3D" parent="tree/Present/StaticBody3D2"]
-mesh = SubResource("ArrayMesh_jqomy")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="tree/Present/StaticBody3D2"]
-shape = SubResource("ConcavePolygonShape3D_mcast")
-
-[node name="Future" type="Node3D" parent="tree"]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="tree/Future"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 2, -0.3, 8)
-collision_layer = 4
-
-[node name="DeadTree_1" type="MeshInstance3D" parent="tree/Future/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("ArrayMesh_h7o1k")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="tree/Future/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_sc0vy")
-
 [node name="Wall" parent="." instance=ExtResource("4_hh1x5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68, 0.655041, -2)
 exists_in_present = false
-script = null
 
 [node name="Tree" parent="." instance=ExtResource("11_k03f2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7908, 0.672021, 1.59325)
