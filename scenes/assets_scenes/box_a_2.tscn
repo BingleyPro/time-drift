@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bimoi4itk64vt"]
+
+[ext_resource type="PackedScene" uid="uid://dodw52i2drhlu" path="res://assets/KayKit_Prototype_Bits_1.0_FREE/Assets/gltf/Box_A.gltf" id="1_r1enl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1yaiw"]
+size = Vector3(0.456342, 0.381709, 0.456406)
+
+[node name="Box_A2" instance=ExtResource("1_r1enl")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.44028e-05, 0.191658, -0.000218779)
+shape = SubResource("BoxShape3D_1yaiw")

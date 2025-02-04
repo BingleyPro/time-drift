@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://6jds31julb3s"
+path="res://.godot/imported/Wall_Decorated.obj-a4132fdf575ac121ad9d88469eae2b98.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wall_Decorated.obj-a4132fdf575ac121ad9d88469eae2b98.mesh"]
+
+source_file="res://assets/KayKit_Prototype_Bits_1.0_FREE/Assets/obj/Wall_Decorated.obj"
+dest_files=["res://.godot/imported/Wall_Decorated.obj-a4132fdf575ac121ad9d88469eae2b98.mesh", "res://.godot/imported/Wall_Decorated.obj-a4132fdf575ac121ad9d88469eae2b98.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
